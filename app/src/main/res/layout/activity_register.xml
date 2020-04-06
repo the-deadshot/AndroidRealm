@@ -82,6 +82,7 @@
                         app:strokeWidth="2dp">
 
                         <EditText
+                            android:id="@+id/register_name_et"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
@@ -111,6 +112,7 @@
                         app:strokeWidth="2dp">
 
                         <EditText
+                            android:id="@+id/register_email_et"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
@@ -140,6 +142,7 @@
                         app:strokeWidth="2dp">
 
                         <EditText
+                            android:id="@+id/register_password_et"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
@@ -170,11 +173,12 @@
                         app:strokeWidth="2dp">
 
                         <EditText
+                            android:id="@+id/register_phone_et"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
                             android:hint="Enter phone no."
-                            android:inputType="number"
+                            android:inputType="phone"
                             android:padding="10dp"
                             android:textColor="@color/black"
                             android:textSize="14dp" />
@@ -201,6 +205,7 @@
                         app:strokeWidth="2dp">
 
                         <EditText
+                            android:id="@+id/register_age_et"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"

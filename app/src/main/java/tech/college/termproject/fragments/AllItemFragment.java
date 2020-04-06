@@ -29,12 +29,15 @@ public class AllItemFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_all_item, container, false);
 
         AllListModel[] myListData = new AllListModel[] {
-                new AllListModel("Email","available", generateRandom()),
-                new AllListModel("Info","available", generateRandom()),
-                new AllListModel("Delete","Not available", generateRandom()),
-                new AllListModel("Dialer","Not available", generateRandom()),
-                new AllListModel("Alert", "available",generateRandom()),
-                new AllListModel("Map","Not available", generateRandom()),
+                new AllListModel("Apple","available", generateRandom()),
+                new AllListModel("Mango","available", generateRandom()),
+                new AllListModel("kiwi","Not available", generateRandom()),
+                new AllListModel("Papaya","Not available", generateRandom()),
+                new AllListModel("watermelon", "available",generateRandom()),
+                new AllListModel("Banana","Not available", generateRandom()),
+                new AllListModel("Pineapple","Not available", generateRandom()),
+                new AllListModel("orange","available", generateRandom()),
+                new AllListModel("Custard apple","available", generateRandom()),
 
         };
 
