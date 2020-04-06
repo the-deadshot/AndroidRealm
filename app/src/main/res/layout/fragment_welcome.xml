@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.WelcomeFragment">
@@ -13,18 +13,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:layout_marginTop="20dp">
+            android:paddingBottom="20dp">
+
+
 
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
                 app:cardElevation="8dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -33,163 +36,160 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:textSize="18sp"
                             android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
                             android:text="Information"
-                            android:textStyle="bold"
-                            />
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/edit_info_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
                             android:text="Edit"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:layout_marginEnd="20dp"
-                            android:layout_alignParentEnd="true"
-                            />
+                            android:textStyle="bold" />
 
                     </RelativeLayout>
 
+
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_marginStart="20dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:text="Name"
-                        android:textSize="16dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        app:cardCornerRadius="8dp"
                         app:strokeColor="@color/appbarcolor"
-                        app:strokeWidth="2dp"
-                        app:cardCornerRadius="8dp">
+                        app:strokeWidth="2dp">
 
                         <EditText
                             android:id="@+id/edit_name_txt"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
-                            android:textSize="14dp"
+                            android:background="@null"
+                            android:enabled="false"
                             android:hint="Enter Name"
                             android:padding="10dp"
                             android:textColor="@color/black"
-                            android:background="@null"
-                            android:enabled="false"
-                            />
+                            android:textSize="14dp" />
                     </com.google.android.material.card.MaterialCardView>
 
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_marginStart="20dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="15dp"
                         android:text="Password"
-                        android:textSize="16dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        app:cardCornerRadius="8dp"
                         app:strokeColor="@color/appbarcolor"
-                        app:strokeWidth="2dp"
-                        app:cardCornerRadius="8dp">
+                        app:strokeWidth="2dp">
 
                         <EditText
                             android:id="@+id/edit_password_txt"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
-                            android:textSize="14dp"
-                            android:hint="Enter new password"
-                            android:padding="10dp"
-                            android:textColor="@color/black"
                             android:background="@null"
                             android:enabled="false"
+                            android:hint="Enter new password"
                             android:inputType="textPassword"
-                            />
+                            android:padding="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_marginStart="20dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:text="Phone"
-                        android:textSize="16dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        app:cardCornerRadius="8dp"
                         app:strokeColor="@color/appbarcolor"
-                        app:strokeWidth="2dp"
-                        app:cardCornerRadius="8dp">
+                        app:strokeWidth="2dp">
 
                         <EditText
                             android:id="@+id/edit_phone_txt"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
-                            android:textSize="14sp"
-                            android:hint="Enter phone no."
-                            android:padding="10dp"
-                            android:inputType="number"
-                            android:textColor="@color/black"
                             android:background="@null"
                             android:enabled="false"
-                            />
+                            android:hint="Enter phone no."
+                            android:inputType="number"
+                            android:padding="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_marginStart="20dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:text="Age"
-                        android:textSize="16dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginBottom="15dp"
+                        app:cardCornerRadius="8dp"
                         app:strokeColor="@color/appbarcolor"
-                        app:strokeWidth="2dp"
-                        app:cardCornerRadius="8dp">
+                        app:strokeWidth="2dp">
 
                         <EditText
                             android:id="@+id/edit_age_txt"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
-                            android:textSize="14sp"
+                            android:background="@null"
+                            android:enabled="false"
                             android:hint="Enter age"
                             android:inputType="number"
                             android:padding="10dp"
                             android:textColor="@color/black"
-                            android:background="@null"
-                            android:enabled="false"
-                            />
+                            android:textSize="14sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
@@ -204,7 +204,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="20dp"
                 android:text="Update"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
