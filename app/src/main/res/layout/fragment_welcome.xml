@@ -197,14 +197,16 @@
             </com.google.android.material.card.MaterialCardView>
 
             <Button
-                android:id="@+id/register_button"
+                android:id="@+id/update_button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="20dp"
+                android:enabled="false"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="Update"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 

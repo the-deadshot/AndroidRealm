@@ -17,6 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import io.realm.Realm;
 import io.realm.exceptions.RealmPrimaryKeyConstraintException;
 import tech.college.termproject.other.Register;
@@ -29,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private ImageView RegisterBackPress;
     private Button RegisterButton;
     private EditText RegisterNameEt, RegisterEmailEt, RegisterPasswordEt, RegisterPhoneEt, RegisterAgeEt;
-    boolean doubleBackToExitPressedOnce = false;
+
 
     public static boolean isEmailValid(EditText email) {
         String strEmail = email.getText().toString().trim();
@@ -54,12 +55,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.login_user_txt:
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 break;
-
             case R.id.register_button:
-
                 registerButtonClick();
                 break;
-
             case R.id.register_back_press:
                 onBackPressed();
                 break;
@@ -73,10 +71,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         RegisterPasswordEt = findViewById(R.id.register_password_et);
         RegisterPhoneEt = findViewById(R.id.register_phone_et);
         RegisterAgeEt = findViewById(R.id.register_age_et);
-
         LoginUserTxt = findViewById(R.id.login_user_txt);
         LoginUserTxt.setOnClickListener(this);
-    RegisterBackPress = findViewById(R.id.register_back_press);
+        RegisterBackPress = findViewById(R.id.register_back_press);
         RegisterBackPress.setOnClickListener(this);
         RegisterButton = findViewById(R.id.register_button);
         RegisterButton.setOnClickListener(this);
@@ -115,9 +112,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             register.age = RegisterAgeEt.getText().toString().trim();
 
                             realm.copyToRealm(register);
-
-                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-
+                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                            intent.putExtra("Email_id", RegisterEmailEt.getText().toString().trim());
+                            startActivity(intent);
                             Toast.makeText(RegisterActivity.this, "Register successfully", Toast.LENGTH_SHORT).show();
                             finishAffinity();
                         } catch (RealmPrimaryKeyConstraintException e) {
@@ -160,24 +157,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return true;
     }
 
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_LONG).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
-    }
 
     @Override
     protected void onDestroy() {

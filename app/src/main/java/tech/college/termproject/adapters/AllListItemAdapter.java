@@ -12,16 +12,18 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import tech.college.termproject.R;
 import tech.college.termproject.model.AllListModel;
 
 public class AllListItemAdapter extends RecyclerView.Adapter<AllListItemAdapter.ViewHolder>{
     Context context;
-    private AllListModel[] listdata;
+    private ArrayList<AllListModel> listdata;
     MyListnerr myListner;
 
     // RecyclerView recyclerView;
-    public AllListItemAdapter(Context context, AllListModel[] listdata, MyListnerr myListner) {
+    public AllListItemAdapter(Context context, ArrayList<AllListModel> listdata, MyListnerr myListner) {
         this.context = context;
         this.listdata = listdata;
         this.myListner = myListner;
@@ -36,16 +38,16 @@ public class AllListItemAdapter extends RecyclerView.Adapter<AllListItemAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final AllListModel myListData = listdata[position];
-        holder.ItemNameTxt.setText(listdata[position].getName());
-        holder.ItemStatusTxt.setText(listdata[position].getStatus());
-        holder.ItemImg.setImageResource(listdata[position].getImgId());
+        final AllListModel myListData = listdata.get(position);
+        holder.ItemNameTxt.setText(myListData.getName());
+        holder.ItemStatusTxt.setText(myListData.getStatus());
+        holder.ItemImg.setImageResource(myListData.getImgId());
     }
 
 
     @Override
     public int getItemCount() {
-        return listdata.length;
+        return listdata.size();
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,6 +70,11 @@ public class AllListItemAdapter extends RecyclerView.Adapter<AllListItemAdapter.
             });
 
         }
+    }
+
+    public void updateList(ArrayList<AllListModel> updatedList){
+        listdata = updatedList;
+        notifyDataSetChanged();
     }
 
     public interface MyListnerr{

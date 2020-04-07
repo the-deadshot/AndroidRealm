@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import tech.college.termproject.fragments.WelcomeFragment;
 import tech.college.termproject.other.Register;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -65,7 +66,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void execute(Realm realm) {
 
                 results = realm.where(Register.class).equalTo("email", LoginEmailEt.getText().toString().trim()).findAll();
-                Log.e("kjhkhjk", results.toString());
 
                 for (Register register : results) {
                     checkEmail = register.email;
@@ -83,7 +83,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (results.isEmpty()) {
             openDialog("Wrong \ncredentials");
         } else if (LoginEmailEt.getText().toString().trim().equals(checkEmail) && LoginPasswordEt.getText().toString().trim().equals(checkPassword)) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("Email_id", LoginEmailEt.getText().toString().trim());
+            startActivity(intent);
             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
             finishAffinity();
         } else {

@@ -1,17 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.AllItemFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:strokeColor="@color/appbarcolor"
+            app:strokeWidth="2dp">
+
+            <EditText
+                android:id="@+id/all_item_search_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_research"
+                android:drawablePadding="10dp"
+                android:hint="Search"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:id="@+id/recyclerView"
         tools:context="example.javatpoint.com.recyclerviewlist.MainActivity">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-</FrameLayout>
+</LinearLayout>
