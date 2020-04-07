@@ -1,10 +1,9 @@
-package tech.college.termproject;
+package tech.college.termproject.activities;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,9 +16,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import io.realm.Realm;
 import io.realm.exceptions.RealmPrimaryKeyConstraintException;
+import tech.college.termproject.R;
 import tech.college.termproject.other.Register;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -61,7 +60,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.register_back_press:
                 onBackPressed();
                 break;
-
         }
     }
 
@@ -153,10 +151,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private boolean isEmpty(EditText etText) {
         if (etText.getText().toString().trim().length() > 0)
             return false;
-
         return true;
     }
-
 
     @Override
     protected void onDestroy() {

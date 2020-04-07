@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,16 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import tech.college.termproject.R;
 import tech.college.termproject.model.AllListModel;
 
-public class AllListItemAdapter extends RecyclerView.Adapter<AllListItemAdapter.ViewHolder> {
+
+public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapter.ViewHolder> {
     Context context;
-    MyListnerr myListner;
     private ArrayList<AllListModel> listdata;
 
     // RecyclerView recyclerView;
-    public AllListItemAdapter(Context context, ArrayList<AllListModel> listdata, MyListnerr myListner) {
+    public FavoriteItemAdapter(Context context, ArrayList<AllListModel> listdata) {
         this.context = context;
         this.listdata = listdata;
-        this.myListner = myListner;
     }
 
     @Override
@@ -48,34 +46,23 @@ public class AllListItemAdapter extends RecyclerView.Adapter<AllListItemAdapter.
         return listdata.size();
     }
 
-    public void updateList(ArrayList<AllListModel> updatedList) {
+    public void favoriteUpdateList(ArrayList<AllListModel> updatedList) {
         listdata = updatedList;
         notifyDataSetChanged();
-    }
-
-    public interface MyListnerr {
-        void itemOnClick(int i);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ItemImg;
         public TextView ItemNameTxt, ItemStatusTxt;
-        public LinearLayout CardLl;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ItemImg = itemView.findViewById(R.id.item_img);
             ItemNameTxt = itemView.findViewById(R.id.item_name_txt);
             ItemStatusTxt = itemView.findViewById(R.id.item_status_txt);
-            CardLl = itemView.findViewById(R.id.card_ll);
-
-            CardLl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    myListner.itemOnClick(getLayoutPosition());
-                }
-            });
 
         }
     }
+
 }
+

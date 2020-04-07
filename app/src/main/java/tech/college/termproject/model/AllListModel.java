@@ -6,6 +6,12 @@ public class AllListModel {
     private String status;
     private int imgId;
 
+    public AllListModel(String name, String status, int imgId) {
+        this.name = name;
+        this.status = status;
+        this.imgId = imgId;
+    }
+
     public String getName() {
         return name;
     }
@@ -27,12 +33,6 @@ public class AllListModel {
     }
 
     public void setImgId(int imgId) {
-        this.imgId = imgId;
-    }
-
-    public AllListModel(String name, String status, int imgId) {
-        this.name = name;
-        this.status = status;
         this.imgId = imgId;
     }
 }

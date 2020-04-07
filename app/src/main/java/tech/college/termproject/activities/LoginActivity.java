@@ -1,10 +1,9 @@
-package tech.college.termproject;
+package tech.college.termproject.activities;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import tech.college.termproject.fragments.WelcomeFragment;
+import tech.college.termproject.R;
 import tech.college.termproject.other.Register;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -119,5 +118,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return false;
 
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mRealm != null) {
+            mRealm.close();
+        }
     }
 }

@@ -1,17 +1,10 @@
 package tech.college.termproject.fragments;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,18 +14,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import io.realm.Realm;
+import io.realm.exceptions.RealmPrimaryKeyConstraintException;
 import tech.college.termproject.R;
 import tech.college.termproject.adapters.AllListItemAdapter;
 import tech.college.termproject.model.AllListModel;
+import tech.college.termproject.other.FavoriteRealm;
 
 
 public class AllItemFragment extends Fragment {
     EditText AllItemSearchEt;
     ArrayList<AllListModel> myListData = new ArrayList<>();
     AllListItemAdapter adapter;
+    Realm mRealm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +38,9 @@ public class AllItemFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_item, container, false);
         AllItemSearchEt = view.findViewById(R.id.all_item_search_et);
+
+        Realm.init(getActivity());
+        mRealm = Realm.getDefaultInstance();
 
         AllItemSearchEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -57,24 +58,24 @@ public class AllItemFragment extends Fragment {
                 filter(s.toString());
             }
         });
-
-        myListData.add(new AllListModel("Apple", "available", generateRandom()) );
+        myListData.clear();
+        myListData.add(new AllListModel("Apple", "available", generateRandom()));
         myListData.add(new AllListModel("Mango", "available", generateRandom()));
         myListData.add(new AllListModel("kiwi", "Not available", generateRandom()));
         myListData.add(new AllListModel("Papaya", "Not available", generateRandom()));
-        myListData.add( new AllListModel("watermelon", "available", generateRandom()));
+        myListData.add(new AllListModel("watermelon", "available", generateRandom()));
         myListData.add(new AllListModel("Banana", "Not available", generateRandom()));
-        myListData.add( new AllListModel("Pineapple", "Not available", generateRandom()));
-        myListData.add( new AllListModel("orange", "available", generateRandom()));
-        myListData.add( new AllListModel("Custard apple", "available", generateRandom()));
+        myListData.add(new AllListModel("Pineapple", "Not available", generateRandom()));
+        myListData.add(new AllListModel("orange", "available", generateRandom()));
+        myListData.add(new AllListModel("Custard apple", "available", generateRandom()));
 
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-         adapter = new AllListItemAdapter(getContext(), myListData, new AllListItemAdapter.MyListnerr() {
+        adapter = new AllListItemAdapter(getContext(), myListData, new AllListItemAdapter.MyListnerr() {
             @Override
             public void itemOnClick(int i) {
 
-                openDialog("Are you sure you want to add " + myListData.get(i).getName() + " into favorite list?");
+                openDialog("Are you sure you want to add " + myListData.get(i).getName() + " into favorite list?", myListData.get(i));
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -91,7 +92,7 @@ public class AllItemFragment extends Fragment {
         return resourceId;
     }
 
-    private void openDialog(String msg) {
+    private void openDialog(String msg, final AllListModel selectedFavorite) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.confirm_dialog);
 
@@ -103,7 +104,33 @@ public class AllItemFragment extends Fragment {
         DialogYesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Realm realm = null;
+                try {
+                    realm = Realm.getDefaultInstance();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
 
+
+                            try {
+                                FavoriteRealm favoriteRealm = new FavoriteRealm();
+                                favoriteRealm.name = selectedFavorite.getName();
+                                favoriteRealm.status = selectedFavorite.getStatus();
+                                favoriteRealm.image = selectedFavorite.getImgId();
+
+                                realm.copyToRealm(favoriteRealm);
+                            } catch (RealmPrimaryKeyConstraintException e) {
+                                Toast.makeText(getActivity(), "Oops something wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } finally {
+                    if (realm != null) {
+                        realm.close();
+                    }
+                }
+
+                dialog.dismiss();
             }
         });
 
@@ -118,15 +145,23 @@ public class AllItemFragment extends Fragment {
         dialog.show();
     }
 
-    void filter(String text){
+    private void filter(String text) {
         ArrayList<AllListModel> temp = new ArrayList<>();
 
-        for(AllListModel d: myListData){
+        for (AllListModel d : myListData) {
 
-            if(d.getName().toLowerCase().startsWith(text.toLowerCase())){
+            if (d.getName().toLowerCase().startsWith(text.toLowerCase())) {
                 temp.add(d);
             }
         }
         adapter.updateList(temp);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mRealm != null) {
+            mRealm.close();
+        }
     }
 }

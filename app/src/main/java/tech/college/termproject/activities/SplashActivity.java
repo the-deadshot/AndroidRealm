@@ -1,6 +1,4 @@
-package tech.college.termproject;
-
-import androidx.appcompat.app.AppCompatActivity;
+package tech.college.termproject.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -11,12 +9,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import tech.college.termproject.R;
+
 
 public class SplashActivity extends AppCompatActivity {
 
     private final int SPLASH_DISPLAY_TIMER = 2500;
     private String version;
     private TextView versionName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         versionName = findViewById(R.id.version_name);
-        versionName.setText("v"+""+version);
+        versionName.setText("v" + "" + version);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -43,6 +45,6 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(mainIntent);
                 finish();
             }
-        },SPLASH_DISPLAY_TIMER);
+        }, SPLASH_DISPLAY_TIMER);
     }
 }

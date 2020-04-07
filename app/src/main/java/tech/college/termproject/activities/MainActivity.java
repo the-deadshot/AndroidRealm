@@ -1,7 +1,4 @@
-package tech.college.termproject;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+package tech.college.termproject.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +7,9 @@ import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+import tech.college.termproject.R;
 import tech.college.termproject.adapters.TabAdapter;
 import tech.college.termproject.fragments.AllItemFragment;
 import tech.college.termproject.fragments.FavoriteListFragment;
@@ -17,12 +17,12 @@ import tech.college.termproject.fragments.WelcomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String emailId;
+    boolean doubleBackToExitPressedOnce = false;
+    TextView ToolbarTxt;
     private TabAdapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    boolean doubleBackToExitPressedOnce = false;
-    TextView ToolbarTxt;
-    public static String emailId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         emailId = getIntent().getStringExtra("Email_id");
-        ToolbarTxt.setText("Welcome"+" "+emailId);
+        ToolbarTxt.setText("Welcome" + " " + emailId);
     }
 
     @Override
