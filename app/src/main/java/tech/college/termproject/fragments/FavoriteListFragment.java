@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import tech.college.termproject.R;
+import tech.college.termproject.activities.MainActivity;
 import tech.college.termproject.adapters.FavoriteItemAdapter;
 import tech.college.termproject.model.AllListModel;
 import tech.college.termproject.other.FavoriteRealm;
@@ -23,13 +24,12 @@ import tech.college.termproject.other.FavoriteRealm;
 
 public class FavoriteListFragment extends Fragment {
 
-    EditText FavoriteSearchEt;
-    ArrayList<AllListModel> myListData = new ArrayList<>();
-    FavoriteItemAdapter favoriteItemAdapter;
-    RealmResults<FavoriteRealm> results;
-    Realm mRealm;
-    RecyclerView FavoriteRecyclerView;
-    boolean firstTimeVisible = false;
+    private EditText FavoriteSearchEt;
+    private ArrayList<AllListModel> myListData = new ArrayList<>();
+    private FavoriteItemAdapter favoriteItemAdapter;
+    private RealmResults<FavoriteRealm> results;
+    private Realm mRealm;
+    private boolean firstTimeVisible = false;
 
 
     @Override
@@ -41,7 +41,7 @@ public class FavoriteListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorite_list, container, false);
 
         FavoriteSearchEt = view.findViewById(R.id.favorite_search_et);
-        FavoriteRecyclerView = view.findViewById(R.id.favorite_recyclerView);
+        RecyclerView favoriteRecyclerView = view.findViewById(R.id.favorite_recyclerView);
 
 
         Realm.init(getActivity());
@@ -49,15 +49,15 @@ public class FavoriteListFragment extends Fragment {
         textWatcher();
 
         favoriteItemAdapter = new FavoriteItemAdapter(getContext(), myListData);
-        FavoriteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FavoriteRecyclerView.setAdapter(favoriteItemAdapter);
+        favoriteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        favoriteRecyclerView.setAdapter(favoriteItemAdapter);
         readFavoriteList();
         firstTimeVisible = true;
         return view;
     }
 
 
-    void filter(String text) {
+    private void filter(String text) {
         ArrayList<AllListModel> temp = new ArrayList<>();
 
         for (AllListModel d : myListData) {
@@ -84,10 +84,10 @@ public class FavoriteListFragment extends Fragment {
             @Override
             public void execute(Realm realm) {
 
-                results = realm.where(FavoriteRealm.class).findAll();
+                results = realm.where(FavoriteRealm.class).equalTo("email", MainActivity.emailId).findAll();
 
                 for (FavoriteRealm favoriteRealm : results) {
-                    myListData.add(new AllListModel(favoriteRealm.name, favoriteRealm.status, favoriteRealm.image));
+                    myListData.add(new AllListModel(favoriteRealm.status, favoriteRealm.image, favoriteRealm.name));
                 }
                 favoriteItemAdapter.notifyDataSetChanged();
             }

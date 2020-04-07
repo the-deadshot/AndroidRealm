@@ -2,23 +2,17 @@ package tech.college.termproject.model;
 
 
 public class AllListModel {
-    private String name;
     private String status;
     private int imgId;
+    private String name;
 
-    public AllListModel(String name, String status, int imgId) {
-        this.name = name;
+    public AllListModel(String status, int imgId, String name) {
+
         this.status = status;
         this.imgId = imgId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
+
 
     public String getStatus() {
         return status;
@@ -34,5 +28,12 @@ public class AllListModel {
 
     public void setImgId(int imgId) {
         this.imgId = imgId;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

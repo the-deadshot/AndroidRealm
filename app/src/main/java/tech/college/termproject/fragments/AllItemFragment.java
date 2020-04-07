@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
 import io.realm.exceptions.RealmPrimaryKeyConstraintException;
 import tech.college.termproject.R;
+import tech.college.termproject.activities.MainActivity;
 import tech.college.termproject.adapters.AllListItemAdapter;
 import tech.college.termproject.model.AllListModel;
 import tech.college.termproject.other.FavoriteRealm;
@@ -31,6 +34,7 @@ public class AllItemFragment extends Fragment {
     ArrayList<AllListModel> myListData = new ArrayList<>();
     AllListItemAdapter adapter;
     Realm mRealm;
+    int position;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,33 +45,30 @@ public class AllItemFragment extends Fragment {
 
         Realm.init(getActivity());
         mRealm = Realm.getDefaultInstance();
+        textwacher();
 
-        AllItemSearchEt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        Map<Integer, String> hashMap = new HashMap<Integer, String>() {{
+            put(1, "Apple");
+            put(2, "Strawberry");
+            put(3, "Pineapple");
+            put(4, "watermelon");
+            put(5, "Custard apple");
+            put(6, "Banana");
+            put(7, "kiwi");
+            put(8, "orange");
+            put(9, "Papaya");
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
-        });
+        }};
         myListData.clear();
-        myListData.add(new AllListModel("Apple", "available", generateRandom()));
-        myListData.add(new AllListModel("Mango", "available", generateRandom()));
-        myListData.add(new AllListModel("kiwi", "Not available", generateRandom()));
-        myListData.add(new AllListModel("Papaya", "Not available", generateRandom()));
-        myListData.add(new AllListModel("watermelon", "available", generateRandom()));
-        myListData.add(new AllListModel("Banana", "Not available", generateRandom()));
-        myListData.add(new AllListModel("Pineapple", "Not available", generateRandom()));
-        myListData.add(new AllListModel("orange", "available", generateRandom()));
-        myListData.add(new AllListModel("Custard apple", "available", generateRandom()));
+        myListData.add(new AllListModel("available", generateRandom(), hashMap.get(position)));
+        myListData.add(new AllListModel("available", generateRandom(), hashMap.get(position)));
+        myListData.add(new AllListModel("Not available", generateRandom(), hashMap.get(position)));
+        myListData.add(new AllListModel("Not available", generateRandom(), hashMap.get(position)));
+        myListData.add(new AllListModel("available", generateRandom(), hashMap.get(position)));
+        myListData.add(new AllListModel("Not available", generateRandom(), hashMap.get(position)));
+        myListData.add(new AllListModel("Not available", generateRandom(), hashMap.get(position)));
+        myListData.add(new AllListModel("available", generateRandom(), hashMap.get(position)));
+        myListData.add(new AllListModel("available", generateRandom(), hashMap.get(position)));
 
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
@@ -85,6 +86,7 @@ public class AllItemFragment extends Fragment {
 
     private int generateRandom() {
         int randomnum = ((int) (Math.random() * (9 - 1))) + 1;
+        position = randomnum;
         Resources resources = getContext().getResources();
         final int resourceId = resources.getIdentifier("a" + randomnum, "drawable",
                 getContext().getPackageName());
@@ -114,6 +116,7 @@ public class AllItemFragment extends Fragment {
 
                             try {
                                 FavoriteRealm favoriteRealm = new FavoriteRealm();
+                                favoriteRealm.email = MainActivity.emailId;
                                 favoriteRealm.name = selectedFavorite.getName();
                                 favoriteRealm.status = selectedFavorite.getStatus();
                                 favoriteRealm.image = selectedFavorite.getImgId();
@@ -155,6 +158,26 @@ public class AllItemFragment extends Fragment {
             }
         }
         adapter.updateList(temp);
+    }
+
+    private void textwacher() {
+
+        AllItemSearchEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
     }
 
     @Override
