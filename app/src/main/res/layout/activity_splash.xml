@@ -54,7 +54,7 @@
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
                 android:textColor="#000"
-                android:text="Our\u1d40\u1d39 creation"
+                android:text="Our creation"
                 android:layout_gravity="center"
                 />
 
